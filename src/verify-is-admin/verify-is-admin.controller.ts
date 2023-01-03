@@ -3,7 +3,7 @@ import { Response } from 'express';
 import { IdTokenDto } from './IdToken.dto';
 import { VerifyIsAdminService } from './verify-is-admin.service';
 
-@Controller('admin-verify')
+@Controller('verify-is-admin')
 export class VerifyIsAdminController {
   constructor(private readonly verifyIsAdminService: VerifyIsAdminService) {}
 

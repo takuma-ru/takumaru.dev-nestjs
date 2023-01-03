@@ -22,7 +22,6 @@ export class VerifyIsAdminService {
         .auth()
         .verifyIdToken(idToken)
         .then((decodedToken) => {
-          console.log('Verify success');
           returnValue = decodedToken.uid;
         })
         .catch((error) => {
@@ -33,9 +32,17 @@ export class VerifyIsAdminService {
       return returnValue;
     };
 
+    if (!body.idToken) {
+      res
+        .status(HttpStatus.NOT_ACCEPTABLE)
+        .send(
+          'The requested value is not an allowed value (null) and processing cannot continue',
+        );
+      return false;
+    }
+
     // 引数のトークンを検証し、uidを返す
     const requestedUid = await VerifyIdToken(body.idToken).then((uid) => {
-      console.log(uid);
       return uid;
     });
 
@@ -52,10 +59,8 @@ export class VerifyIsAdminService {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          console.log('Document data:', doc.data());
           return doc.data().uids;
         } else {
-          console.log('No such document!');
           res
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .send('You are not registered as an administrator');

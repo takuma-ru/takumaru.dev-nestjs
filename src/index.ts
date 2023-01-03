@@ -6,6 +6,7 @@ import * as express from 'express';
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import helmet from 'helmet';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 const server = express();
 
@@ -29,10 +30,19 @@ export const createNestServer = async (expressInstance) => {
     credential: admin.credential.cert(adminConfig),
   });
 
+  const config = new DocumentBuilder()
+    .setTitle('Cats example')
+    .setDescription('The cats API description')
+    .setVersion('1.0')
+    .addTag('cats')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+
   app.use(helmet());
   app.enableCors();
 
   console.log('the server is starting @ firebase');
+  SwaggerModule.setup('/swagger', app, document);
   return app.init();
 };
 
