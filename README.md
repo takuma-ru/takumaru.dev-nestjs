@@ -1,73 +1,58 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# <div style="text-align: center;">takumaru.dev-vue</div>
+<!-- <p align="center">
+  <img src="/static/icon.png"  width="256" height="256" alt="nuxt-firebase logo">
+</p> -->
 
 ## Description
+takuma-ru's home page
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Dependencies / DevDependencies
+| package name | version |
+| -- | -- |
+| @storybook/vue3 | ^6.5.13 |
+| @takuma-ru/vue-swipe-modal | ^4.0.7 |
+| @vueuse/core | ^9.5.0 |
+| eslint | ^8.26.0 |
+| material-symbols | ^0.4.0 |
+| nuxt | 3.0.0 |
+| pinia | ^2.0.25 |
+| unplugin-auto-import | ^0.11.5 |
+| unplugin-vue-components | ^0.22.11 |
+| vite-plugin-pwa | ^0.13.3 |
 
-## Installation
-
-```bash
-$ npm install
+## Getting Started
+#### 1. Install
+```powershell
+yarn
 ```
 
-## Running the app
+#### 2. Start dev server
+```powershell
+yarn start:dev
+```
+[localhost:4000](http://localhost:4000)
 
-```bash
-# development
-$ npm run start
+```powershell
+yarn firebase:dev
+```
+[localhost:5001](http://localhost:5001/takuma-ru-homepage/asia-northeast1/api)
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+#### 4. Build this App
+```powershell
+yarn build
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+#### 5. Deploy
+```powershell
+yarn firebase:deploy
 ```
 
-## Support
+## Deploy Service
+[Firebase Functions](https://firebase.google.com/products/functions)
+<!-- [Firebase Hosting](https://firebase.google.com/products/hosting?gclid=Cj0KCQiA1sucBhDgARIsAFoytUuCQdfrUzumhsqOWLO6TncdTd959kbvy2HGpWO6AXQVvFlRpbuy0l4aAg9uEALw_wcB&gclsrc=aw.ds) -->
+<!-- [Vercel](https://vercel.com/) -->
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+----
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+<!-- I would appreciate it if you would not delete this statement -->
+**This template was created by [@takuma-ru/takuma-ru-nuxt-template](https://github.com/takuma-ru/takuma-ru-nuxt-template)**
