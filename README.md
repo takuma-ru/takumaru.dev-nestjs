@@ -1,24 +1,22 @@
-# <div style="text-align: center;">takumaru.dev-vue</div>
+# <div style="text-align: center;">takumaru.dev-nestjs</div>
 <!-- <p align="center">
   <img src="/static/icon.png"  width="256" height="256" alt="nuxt-firebase logo">
 </p> -->
 
 ## Description
-takuma-ru's home page
+REST API used by takumaru.dev
 
 ## Dependencies / DevDependencies
 | package name | version |
 | -- | -- |
-| @storybook/vue3 | ^6.5.13 |
-| @takuma-ru/vue-swipe-modal | ^4.0.7 |
-| @vueuse/core | ^9.5.0 |
-| eslint | ^8.26.0 |
-| material-symbols | ^0.4.0 |
-| nuxt | 3.0.0 |
-| pinia | ^2.0.25 |
-| unplugin-auto-import | ^0.11.5 |
-| unplugin-vue-components | ^0.22.11 |
-| vite-plugin-pwa | ^0.13.3 |
+| @nestjs | ^9.0.0 |
+| @nestjs/config | ^2.2.0 |
+| eslint | ^8.0.1 |
+| firebase-admin | ^11.4.1 |
+| firebase-admin | ^4.1.1 |
+| helmet | ^6.0.1 |
+| jest | 28.1.3 |
+| prettier | ^2.3.2 |
 
 ## Getting Started
 #### 1. Install
