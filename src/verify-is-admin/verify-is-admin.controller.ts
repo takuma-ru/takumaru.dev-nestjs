@@ -15,6 +15,6 @@ export class VerifyIsAdminController {
     @Body() body: IdTokenDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    return this.verifyIsAdminService.VerifyIsAdmin(body, res);
+    this.verifyIsAdminService.VerifyIsAdmin(body, res);
   }
 }

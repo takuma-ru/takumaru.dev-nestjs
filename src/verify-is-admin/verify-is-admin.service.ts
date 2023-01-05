@@ -10,7 +10,7 @@ export class VerifyIsAdminService {
    * @param body トークン
    * @returns アドミンかどうかのフラグ
    */
-  async VerifyIsAdmin(body: IdTokenDto, res: Response): Promise<boolean> {
+  async VerifyIsAdmin(body: IdTokenDto, res: Response) {
     /**
      * リクエストBodyのトークンを
      * @param idToken リクエストBodyのidToken
@@ -25,59 +25,63 @@ export class VerifyIsAdminService {
           returnValue = decodedToken.uid;
         })
         .catch((error) => {
-          res.status(HttpStatus.UNAUTHORIZED).send(error);
-          return null;
+          console.log(error);
+          return res.status(HttpStatus.FORBIDDEN).send({
+            isAdmin: false,
+            message: error,
+          });
         });
 
       return returnValue;
     };
 
+    // リクエストbody に idToken がなかった場合はアドミンではないとして処理終了
     if (!body.idToken) {
-      res
-        .status(HttpStatus.NOT_ACCEPTABLE)
-        .send(
+      return res.status(HttpStatus.NOT_ACCEPTABLE).send({
+        isAdmin: false,
+        message:
           'The requested value is not an allowed value (null) and processing cannot continue',
-        );
-      return false;
+      });
     }
 
+    let requestedUid: string;
+
     // 引数のトークンを検証し、uidを返す
-    const requestedUid = await VerifyIdToken(body.idToken).then((uid) => {
-      return uid;
+    await VerifyIdToken(body.idToken).then((uid) => {
+      requestedUid = uid;
     });
 
-    // requestedUid が null (= 検証に失敗)した場合は、アドミンではないとして処理を終了
     if (!requestedUid) {
-      return false;
+      return res.status(HttpStatus.FORBIDDEN).send({
+        isAdmin: false,
+        message:
+          'Firebase ID token has invalid signature. See https://firebase.google.com/docs/auth/admin/verify-id-tokens for details on how to retrieve an ID token.',
+      });
     }
 
     const db = admin.firestore();
     // Firestore に保存されているアドミンのuid配列を取得する
-    const approvedUidList: Array<string> | null = await db
+    let approvedUidList: Array<string>;
+    await db
       .collection('adminUserData')
       .doc('approvedUid')
       .get()
       .then((doc) => {
         if (doc.exists) {
-          return doc.data().uids;
+          approvedUidList = doc.data().uids as Array<string>;
         } else {
-          res
-            .status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .send('You are not registered as an administrator');
-          return;
+          return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+            isAdmin: false,
+            message: `Error getting document: Could not retrieve administrator list information`,
+          });
         }
       })
       .catch((error) => {
-        res
-          .status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .send(`Error getting document: ${error}`);
-        return;
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+          isAdmin: false,
+          message: `Error getting document: ${error}`,
+        });
       });
-
-    // uid配列が取得できなかった場合は、アドミンではないとして処理を終了
-    if (!approvedUidList) {
-      return false;
-    }
 
     /**
      * アドミンかどうかのフラグ
@@ -86,6 +90,13 @@ export class VerifyIsAdminService {
      */
     const isAdmin = approvedUidList.includes(requestedUid) ? true : false;
 
-    return isAdmin;
+    if (!isAdmin) {
+      return res.status(HttpStatus.FORBIDDEN).send({
+        isAdmin: false,
+        message: 'You are not registered as an administrator',
+      });
+    } else {
+      return res.status(HttpStatus.OK).send({ isAdmin: isAdmin });
+    }
   }
 }
